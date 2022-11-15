@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <TestForm />
+    <!-- <TestRender :tags="['h1', 'h2','h3']"></TestRender> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TestForm from "./components/TestForm.vue";
+// import TestRender from "./components/TestRender.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TestForm,
+    // TestRender,
+  },
+};
 </script>
 
 <style>
