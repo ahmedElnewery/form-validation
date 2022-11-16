@@ -1,8 +1,9 @@
 
 class ValidateString {
-
-    required() {
+   
+    required(requiredMSg) {
         this.isRequired = true
+        this.requiredMSg = requiredMSg
         return this
     }
     min(minValue) {
@@ -13,12 +14,17 @@ class ValidateString {
         this.maxValue = maxValue
         return this
     }
+    test(testFn,message) {
+        this.testFn =testFn
+        this.testMessage =message
+        return this
+    }
     validate(value, key) {
-        let errors = []
+        let errors=[]
         if (this.isRequired && !value) {
             errors.push({
                 type: "required",
-                message: `the ${key} is required`
+                message: this.requiredMSg ?? `the ${key} is required`
             })
         } else if (this.maxValue && value.length > this.maxValue) {
             errors.push({
@@ -30,7 +36,13 @@ class ValidateString {
                 type: "min",
                 message: `the ${key} should be greater than ${this.minValue}`
             })
+        } else if(this.testFn && this.testFn(value)){
+            errors.push({
+                type: "test",
+                message: this.testMessage
+            })
         }
+
         return errors
 
     }
